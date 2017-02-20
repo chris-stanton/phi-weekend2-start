@@ -5,7 +5,7 @@ init();
 
 //variables
 var i = 0;
-var highStudentCount = 18;
+var highStudentCount = 17;
 var lowStudentCount = 0;
 var currentStudentIndex = 0;
 
@@ -25,25 +25,27 @@ function init(){
           //animation
           $("#informationContainer").animate({opacity: "0"}, 200).animate({opacity: "1"}, 200);
           var $el = $("#informationContainer").children().last();
-          $el.append("<div class='informationAppend'><p>" + data.phirephiters[i].name + "</p></div>");
-          $el.append("<div><p>" + '<strong>Git Username: </strong>' + data.phirephiters[i].git_username + "</p></div>");
-          $el.append("<div><p>" + '<strong>Shoutout: </strong>' + data.phirephiters[i].shoutout + "</p></div>");
+          $el.append("<div class='informationAppend'><p>" + data.phirephiters[currentStudentIndex].name + "</p></div>");
+          $el.append("<div><p>" + '<strong>Git Username: </strong>' + data.phirephiters[currentStudentIndex].git_username + "</p></div>");
+          $el.append("<div><p>" + '<strong>Shoutout: </strong>' + data.phirephiters[currentStudentIndex].shoutout + "</p></div>");
         }//end of appendInfo()
 
         carousel();
         function carousel() {
+          $(".slider").empty();
           //adds # of blocks to highStudentCount var
           for (var i = 0; i < highStudentCount; i++) {
             var block = $("<div>");
             block.addClass("blocks");
-            block.data("lowStudentCount", i);
+            block.data("studentIndex", i);
             $(".slider").append(block);
           }//end of FOR
           //highlights indexed selection
           $(".blocks").each(function() {
-            console.log(this);//logs indivual div's
+            console.log(this);//logs individual div's
+            console.log($(this).data("studentIndex"));
         //The perameters for the IF ELSE below are wrong.  I hope im on the right path but am stuck on how to tie (this) to currentStudentIndex
-            if(this == currentStudentIndex) {
+            if($(this).data("studentIndex") == currentStudentIndex) {
               $(this).css("background-color", "red");
             } else {
               $(this).css("background-color", "white");
@@ -57,25 +59,28 @@ function init(){
               //}//end of carousel()
 
         function click() {
+
 //next button
           $("#nextButton").click(function(){
             $(".phirephiters").remove();
-            i++;
-              if (i == highStudentCount){
-                i = lowStudentCount;
+            currentStudentIndex++;
+              if (currentStudentIndex == highStudentCount){
+                currentStudentIndex = lowStudentCount;
               }//end of IF
               console.log("next: " + i);
               appendInfo();
+                carousel();
             });//end of #nextButton on click function
 //previous button
             $("#prevButton").click(function(){
               $(".phirephiters").remove();
-              i--;
-                if (i == -1){
-                  i = highStudentCount;
+              currentStudentIndex--;
+                if (currentStudentIndex == -1){
+                  currentStudentIndex = highStudentCount;
                 }//end of IF
                 console.log("previous: " + i);
                 appendInfo();
+                  carousel();
             });//end of #prevButton on click function
           }//end of click()
 
