@@ -42,9 +42,8 @@ function init(){
           //highlights indexed selection
           $(".blocks").each(function() {
             console.log(this);//logs indivual div's
-            console.log($(this).data());
-
-            if($(this).data() == currentStudentIndex) {
+        //The perameters for the IF ELSE below are wrong.  I hope im on the right path but am stuck on how to tie (this) to currentStudentIndex
+            if(this == currentStudentIndex) {
               $(this).css("background-color", "red");
             } else {
               $(this).css("background-color", "white");
