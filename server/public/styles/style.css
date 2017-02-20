@@ -1,25 +1,34 @@
 
+body {
+  background-color: tan;
+}
+
 h1 {
   text-align: center;
   font-size: 60px;
+  margin-bottom: 100px;
 }
 
 #informationContainer {
   text-align: center;
   font-size: 20px;
+  margin-top: 50px;
 }
 
 #prevButton {
   font-size: 25px;
   text-align: center;
   display: inline-block;
+  background-color: black;
+  color: white;
+  margin-left: 150px;
 }
 
-#slider {
-  text-align: center;
+.slider {
+  text-align: ;
   display: inline-block;
-  float: ;
   width: 300px;
+  
 }
 
 #nextButton {
@@ -27,16 +36,19 @@ h1 {
   text-align: center;
   float: right;
   display: inline-block;
+  background-color: black;
+  color: white;
+  margin-right: 150px;
 }
 
-.bottom {
-  text-align: center;
+.informationAppend {
+  font-size: 35px;
+  font-family: cursive;
 }
 
-.bottomIndex {
-  float: ;
-}
-
-.block {
-  width: 20px;
+.blocks {
+  width: 10px;
+  height: 10px;
+  float: left;
+  border: 1px solid black;
 }

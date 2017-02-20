@@ -1,11 +1,12 @@
 
 $(document).ready(function(){
+
 init();
+
 //variables
 var i = 0;
-var objectIndex = 0;
 var highStudentCount = 18;
-var lowStudentCount = -18;
+var lowStudentCount = 0;
 
 function init(){
 // Upon page load, get the data from the server
@@ -15,29 +16,54 @@ function init(){
       success: function(data){
         for (var i = 0; i < data.phirephiters.length; i++) {
         }//end of FOR loop
-click();
+        click();
 
 //info append to <div id="informationContainer"></div> on html
         function appendInfo(){
           $("#informationContainer").append("<div class='phirephiters'></div>");
           //animation
-          $("#informationContainer").animate({opacity: "0"}, 300).animate({opacity: "1"}, 300);
+          $("#informationContainer").animate({opacity: "0"}, 200).animate({opacity: "1"}, 200);
           var $el = $("#informationContainer").children().last();
-          $el.append("<div><p>" + data.phirephiters[i].name + "</p></div>");
-          $el.append("<div><p>" + 'Git Username: ' + data.phirephiters[i].git_username + "</p></div>");
-          $el.append("<div><p>" + 'Shoutout: ' + data.phirephiters[i].shoutout + "</p></div>");
+          $el.append("<div class='informationAppend'><p>" + data.phirephiters[i].name + "</p></div>");
+          $el.append("<div><p>" + '<strong>Git Username: </strong>' + data.phirephiters[i].git_username + "</p></div>");
+          $el.append("<div><p>" + '<strong>Shoutout: </strong>' + data.phirephiters[i].shoutout + "</p></div>");
         }//end of appendInfo()
 
-function click() {
+        carousel();
+        function carousel() {
+          //adds # of blocks to highStudentCount var
+          for (var i = 0; i < highStudentCount; i++) {
+            var block = $("<div>");
+            block.addClass("blocks");
+            block.data("lowStudentCount", i);
+            $(".slider").append(block);
+          }//end of FOR
+          //highlights indexed selection
+          $(".blocks").each(function() {
+            console.log(this);//logs indivual div's
+            if($(this).data(this) == i) {
+              $(this).css("background-color", "red");
+            } else {
+              $(this).css("background-color", "white");
+            }//end of IF
+          })//end of each()
+        }//end of carousel()
+
+              // for (var i = 0; i < data.phirephiters.length; i++) {
+              //   $(".slider").append("<div class='blocks'" + i + "></div>");
+              //}//end of FOR
+              //}//end of carousel()
+
+        function click() {
 //next button
           $("#nextButton").click(function(){
             $(".phirephiters").remove();
             i++;
               if (i == highStudentCount){
-                i = 0;
+                i = lowStudentCount;
               }//end of IF
-console.log("next: " + i);
-appendInfo();
+              console.log("next: " + i);
+              appendInfo();
             });//end of #nextButton on click function
 //previous button
             $("#prevButton").click(function(){
@@ -46,29 +72,12 @@ appendInfo();
                 if (i == -1){
                   i = highStudentCount;
                 }//end of IF
-console.log("previous: " + i);
-appendInfo();
+                console.log("previous: " + i);
+                appendInfo();
             });//end of #prevButton on click function
-}//end of click()
-
-
-
-
-// bottom();
-// //appends bottom index
-//         function bottom(){
-//           for (var j = 0; j < data.phirephiters.length; j++) {
-//           var $el = $(".bottom").children().last();
-//           $(".bottom").append("<div class='bottomIndex'>" + i + "</div>");
-//           $(".bottom").children().last().data("name", j);
-//           $(".bottom").children().first().css("background-color", "teal");
-//           }//end of FOR
-//         }//end of addBottomIndex()
-
-
-
+          }//end of click()
 
       }//end of sucess: function
     });//end of ajax
-  }//end of loadData()
+  }//end of init()
 });//end of document.ready
