@@ -18,7 +18,8 @@ h1 {
 #slider {
   text-align: center;
   display: inline-block;
-  float: inherit;
+  float: ;
+  width: 300px;
 }
 
 #nextButton {
@@ -30,4 +31,12 @@ h1 {
 
 .bottom {
   text-align: center;
+}
+
+.bottomIndex {
+  float: ;
+}
+
+.block {
+  width: 20px;
 }
