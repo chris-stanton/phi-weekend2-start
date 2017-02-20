@@ -7,6 +7,7 @@ init();
 var i = 0;
 var highStudentCount = 18;
 var lowStudentCount = 0;
+var currentStudentIndex = 0;
 
 function init(){
 // Upon page load, get the data from the server
@@ -41,7 +42,9 @@ function init(){
           //highlights indexed selection
           $(".blocks").each(function() {
             console.log(this);//logs indivual div's
-            if($(this).data(this) == i) {
+            console.log($(this).data());
+
+            if($(this).data() == currentStudentIndex) {
               $(this).css("background-color", "red");
             } else {
               $(this).css("background-color", "white");
